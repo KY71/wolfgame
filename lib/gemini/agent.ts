@@ -7,7 +7,11 @@ import { GoogleGenAI, Type } from "@google/genai";
 import type { Agent, AgentView } from "../game/agent";
 import { buildDecisionPrompt, buildSpeakPrompt } from "./prompt";
 
-const MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+// ★ 用 alias「gemini-flash-latest」而非釘死版本號:固定版本(如
+//   gemini-2.5-flash)會被 Google 對新 API key 下架,回 404「no longer
+//   available to new users」,導致所有呼叫失敗、NPC 全部沉默不語。
+//   alias 永遠指向當前維護中的 flash 模型,可根治這類下架問題。
+const MODEL = process.env.GEMINI_MODEL || "gemini-flash-latest";
 
 function nameOf(view: AgentView, id: string): string {
   return view.roster.find((p) => p.id === id)?.name ?? id;

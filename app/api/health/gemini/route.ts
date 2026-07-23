@@ -5,7 +5,7 @@
 // ★ 只回傳除錯所需的最小資訊,絕不回傳 API key 本身。
 import { NextResponse } from "next/server";
 
-const MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+const MODEL = process.env.GEMINI_MODEL || "gemini-flash-latest";
 
 export async function GET() {
   const hasKey = Boolean(process.env.GEMINI_API_KEY);
