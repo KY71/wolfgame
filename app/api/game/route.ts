@@ -17,7 +17,7 @@ export async function POST(req: Request) {
   const state = createGame({ gameId, humanName });
 
   await runFlow(state, getAgent());
-  saveGame(state);
+  await saveGame(state);
 
   return NextResponse.json(toPublicView(state));
 }
