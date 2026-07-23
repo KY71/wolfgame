@@ -15,7 +15,7 @@ export async function POST(
   ctx: { params: Promise<{ id: string }> },
 ) {
   const { id } = await ctx.params;
-  const state = loadGame(id);
+  const state = await loadGame(id);
   if (!state) {
     return NextResponse.json({ error: "找不到遊戲" }, { status: 404 });
   }
@@ -49,7 +49,7 @@ export async function POST(
   }
 
   await runFlow(state, getAgent());
-  saveGame(state);
+  await saveGame(state);
 
   return NextResponse.json(toPublicView(state));
 }
